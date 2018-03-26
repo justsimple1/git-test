@@ -5,15 +5,15 @@
 	* Class для создания калькулятора.
 	*
 	* @author panin.nikita.
-	* @since 24.03.2018
+	* @since 24.03.2018.
 	* @version 1.
 	*/
-public class Calculate{
+public class Calculate {
 	/**
 	* Main.
-	* @param args - args.
-	*/
-	public static void main(String[] args){
+	* @param args args.
+	*/ 
+	public static void main(String[] args) {
 		System.out.println("Hello world");
 	}
 	/**
@@ -21,7 +21,7 @@ public class Calculate{
 	*@param name yeah.
 	*return Echo yeah.
 	*/
-	public String echo(String name){
+	public String echo(String name) {
 		return  "Echo, echo, echo : " + name;
 	}
 }

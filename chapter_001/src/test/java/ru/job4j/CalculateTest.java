@@ -12,8 +12,8 @@ import static org.junit.Assert.assertThat;
 * @since 25.03.2018
 */
 
-public class CalculateTest{
-	public void echoMethodVerification(){
+public class CalculateTest {
+	public void echoMethodVerification() {
 	String input = "All right!";
 	String expect = "Echo, echo, echo : All right!";
 	
