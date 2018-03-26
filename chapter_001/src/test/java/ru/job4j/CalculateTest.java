@@ -6,10 +6,10 @@ import java.io.PrintStream;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 /**
- * Test
+ * Тестирование арифметических операций.
  * @author panin.nikita(dla-raboti5@yandex.ru)
  * @version 1
- * @since 25.03.2018
+ * @since 26.03.2018
  */
 
 public class CalculateTest {
