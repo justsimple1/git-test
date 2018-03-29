@@ -14,12 +14,10 @@ public class Counter {
      */
     public int add(int start, int finish) {
         int summ = 0;
-        int counter = start;
-        for( int i = counter; counter <= finish; counter++){
-            if(start % 2 == 0){
-               summ += start;
-               start ++;
-            }else start++;
+        for( int i = start; i <= finish; i++){
+            if(i % 2 == 0){
+               summ += i;
+            }
         } return summ;
     }
 }
