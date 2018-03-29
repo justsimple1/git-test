@@ -14,7 +14,7 @@ public class MaxTest {
     @Test
     public void whenFirstLessSecond() {
         Max maximum = new Max();
-        int result = maximum.max(2, 5);
-        assertThat(result, is(5));
+        int result = maximum.max(6, 5, 9);
+        assertThat(result, is(9));
     }
 }
