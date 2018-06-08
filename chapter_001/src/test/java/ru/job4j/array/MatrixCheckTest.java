@@ -11,36 +11,69 @@ import static org.hamcrest.core.Is.is;
 
 public class MatrixCheckTest {
     @Test
-    public void whenDiagonalIsMonoByTrueThenTrue(){
+    public void whenDiagonalIsMonoByTrueThenTrue() {
         MatrixCheck check = new MatrixCheck();
-        boolean[][] input = new boolean[][]{{true,false,true},{true,true,false},{true,false,true}};
+        boolean[][] input = new boolean[][]{{true, false, true}, {true, true, false}, {true, false, true}};
         boolean result = check.mono(input);
         boolean expected = true;
-        assertThat(result,is(expected));
+        assertThat(result, is(expected));
     }
     @Test
-    public void whenDiagonalIsNotMonoByTrueThenFalse(){
+    public void whenDiagonalIsNotMonoByTrueThenFalse() {
         MatrixCheck check = new MatrixCheck();
-        boolean[][] input = new boolean[][]{{true,false,true},{true,true,true},{false,false,true}};
+        boolean[][] input = new boolean[][]{{true, false, true}, {true, true, true}, {false, false, true}};
         boolean result = check.mono(input);
         boolean expected = false;
-        assertThat(result,is(expected));
+        assertThat(result, is(expected));
     }
     @Test
-    public void whenDiagonalIsMonoByFalseThenTrue(){
+    public void whenDiagonalIsMonoByFalseThenTrue() {
         MatrixCheck check = new MatrixCheck();
-        boolean[][] input = new boolean[][]{{false,true,false},{true,false,false},{false,true,false}};
+        boolean[][] input = new boolean[][]{
+                {false, true, false},
+                {true, false, false},
+                {false, true, false}};
         boolean result = check.mono(input);
         boolean expected = true;
-        assertThat(result,is(expected));
+        assertThat(result, is(expected));
     }
     @Test
-    public void whenDiagonalIsNotMonoByFalseThenFalse(){
+    public void whenDiagonalIsNotMonoByFalseThenFalse() {
         MatrixCheck check = new MatrixCheck();
-        boolean[][] input = new boolean[][]{{false,false,true},{false,false,false},{false,false,true}};
+        boolean[][] input = new boolean[][]{
+                {false, false, true},
+                {false, false, false},
+                {false, false, true}};
         boolean result = check.mono(input);
         boolean expected = false;
-        assertThat(result,is(expected));
+        assertThat(result, is(expected));
+    }
+    @Test
+    public void whenDiagonalIsMonoByFalseWhereSquare4x4ThenTrue() {
+        MatrixCheck check = new MatrixCheck();
+        boolean[][] input = new boolean[][]{
+                {false, false, true,  false},
+                {false, false, false, false},
+                {false, false, false, false},
+                {false, false, true,  false}};
+        boolean result = check.mono(input);
+        boolean expected = true;
+        assertThat(result, is(expected));
+    }
+    @Test
+    public void whenDiagonalIsMonoByTrueWhereSquare7x7ThenTrue() {
+        MatrixCheck check = new MatrixCheck();
+        boolean[][] input = new boolean[][]{
+                {true,  false, true,  false, true,  false, true},
+                {false, true,  false, false, false, true,  false},
+                {false, false, true,  false, true,  false, true},
+                {false, false, true,  true,  true,  false, true},
+                {false, false, true,  false, true,  false, true},
+                {false, true,  true,  false, true,  true,  true},
+                {true,  false, true,  false, true,  false, true}};
+        boolean result = check.mono(input);
+        boolean expected = true;
+        assertThat(result, is(expected));
     }
 
 }

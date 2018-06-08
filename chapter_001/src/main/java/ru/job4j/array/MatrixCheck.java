@@ -10,18 +10,18 @@ package ru.job4j.array;
 public class MatrixCheck {
     /**
      * Method for check diagonal.
+     *
      * @param - values of dimensional-array.
      * @return - result true or false, what elements in diagonal is mono.
      */
-    public boolean mono(boolean[][] data){
+    public boolean mono(boolean[][] data) {
         boolean result = true;
         for (int i = 0; i < data.length; i++) {
-            for(int j = 0; j < data.length; j++) {
-                if((i+j)%2==0 && data[data.length-1][data.length-1] != data[i][j]){
+            for (int j = 0; j < data.length; j++) {
+                if ((i == j) && data[i][j] != data[i][data.length - j - 1]) {
                     result = false;
-                    break;
                 }
             }
-        }return result;
+        } return result;
     }
 }
