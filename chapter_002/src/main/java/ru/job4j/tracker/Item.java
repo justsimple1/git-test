@@ -13,22 +13,25 @@ public class Item {
     private long created;
     private String id;
 
-    Item(){}
+    Item() { }
 
     /**
      * Конструктор заявки
      *
      * @param name - имя заявки
      * @param desc - описание заявки .
-     * @param created - время создания заявки
+
      */
-    Item(String name, String desc, long created){
+    Item(String name, String desc, long created) {
         this.name = name;
         this.desc = desc;
         this.created = created;
+
     }
 
-    public void setId(String id){
+
+
+    public void setId(String id) {
         this.id = id;
     }
 

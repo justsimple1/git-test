@@ -34,10 +34,11 @@ public class Tracker {
      * @param id - уникальныый идентификатор заявки .
      * @param item новая заявка на которую заменяем старую заявку .
      */
-    public void replace(String id, Item item){
-        for(int i = 0; i < position; i++){
-            if(items[i] != null && items[i].getId().equals(id)){
-                items[i]=item;
+    public void replace(String id, Item item) {
+        item.setId(id);
+        for (int i = 0; i < position; i++) {
+            if (items[i] != null && items[i].getId().equals(id)) {
+                items[i] = item;
                 break;
             }
         }
@@ -47,9 +48,10 @@ public class Tracker {
      * @param id - уникальныый идентификатор заявки .
      */
     public void delete(String id) {
-        for (int index = 0; index < position; index++){
-            if(items[index] != null && items[index].getId().equals(id)){
-                System.arraycopy(items,(index+1),items,index,(items.length-index-1));
+        for (int index = 0; index < position; index++) {
+            if (items[index] != null && items[index].getId().equals(id)) {
+                System.arraycopy(items, (index + 1), items, index, (items.length - index - 1));
+                position--;
                 break;
             }
         }
@@ -59,28 +61,25 @@ public class Tracker {
      * @param key - Вводимое имя .
      * @return - массив заявок с искомым именем .
      */
-    public Item[] findByName(String key){
-        Item[] rst = new Item [position];
+    public Item[] findByName(String key) {
+        Item[] rst = new Item[position];
         int index = 0;
         for (int i = 0; i < position; i++) {
-            if (key.equals(items[i].getName())){
-                rst[index]= items[i];
+            if (key.equals(items[i].getName())) {
+                rst[index] = items[i];
                 index++;
-            }}
-        for(int j = 0; j < rst.length; j++){
-            if(rst[j] == null){
-                break;
             }
-        }   return Arrays.copyOf(rst,index);
+        }
+           return Arrays.copyOf(rst, index);
     }
     /**
      * Метод реализаущий поиск заявки по его Id .
      * @param id - уникальныый идентификатор заявки .
      */
-    public Item findById(String id){
+    public Item findById(String id) {
         Item rst = null;
-            for(int i = 0; i < position; i++){
-                if(items[i] != null && items[i].getId().equals(id)){
+            for (int i = 0; i < position; i++) {
+                if (items[i] != null && items[i].getId().equals(id)) {
                    rst = items[i];
                    break;
                 }
@@ -91,20 +90,22 @@ public class Tracker {
      * Метод реализаущий вывод всех заявок существующих в хранилище .
      * @return rst - массив со всеми заявками .
      */
-    public Item[] findAll(){
-        Item[] rst = new Item[position];
-        for(int index = 0; index < position; index++){
-            if(items[index]!=null){
-                rst[index]=items[index];
-            }
-        }return rst;
-    }
+//    public Item[] findAll() {
+//        Item[] rst = new Item[position];
+//        for (int index = 0; index < position; index++) {
+//            if (items[index] != null) {
+//                rst[index] = items[index];
+//            }
+//        } return rst;
+//    }
+    public Item[] findAll() {
+    return Arrays.copyOf(this.items, this.position);}
     /**
      * Метод генерирует уникальный ключ для заявки.
      * Так как у заявки нет уникальности полей, имени и описание. Для идентификации нам нужен уникальный ключ.
      * @return Уникальный ключ.
      */
     private String generateId() {
-     return  String.valueOf(System.currentTimeMillis()+RANDOM.nextInt());
+     return  String.valueOf(System.currentTimeMillis() + RANDOM.nextInt());
     }
 }
