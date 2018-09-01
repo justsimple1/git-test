@@ -34,27 +34,31 @@ public class Tracker {
      * @param id - уникальныый идентификатор заявки .
      * @param item новая заявка на которую заменяем старую заявку .
      */
-    public void replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
+        boolean result = false;
         item.setId(id);
         for (int i = 0; i < position; i++) {
             if (items[i] != null && items[i].getId().equals(id)) {
                 items[i] = item;
+                result = true;
                 break;
             }
-        }
+        }return result;
     }
     /**
      * Метод реализаущий удаление заявки по его Id .
      * @param id - уникальныый идентификатор заявки .
      */
-    public void delete(String id) {
+    public boolean delete(String id) {
+        boolean result = false;
         for (int index = 0; index < position; index++) {
             if (items[index] != null && items[index].getId().equals(id)) {
                 System.arraycopy(items, (index + 1), items, index, (items.length - index - 1));
                 position--;
+                result = true;
                 break;
             }
-        }
+        }return result;
     }
     /**
      * Метод реализаущий поиск заявок по имени .
@@ -99,7 +103,7 @@ public class Tracker {
 //        } return rst;
 //    }
     public Item[] findAll() {
-    return Arrays.copyOf(this.items, this.position);}
+    return Arrays.copyOf(this.items, this.position); }
     /**
      * Метод генерирует уникальный ключ для заявки.
      * Так как у заявки нет уникальности полей, имени и описание. Для идентификации нам нужен уникальный ключ.

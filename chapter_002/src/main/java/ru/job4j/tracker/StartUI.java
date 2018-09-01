@@ -132,7 +132,7 @@ public class StartUI  {
         System.out.println("------------Поиск заявок по Имени --------------");
         String key = this.input.ask("Введите Имя заявок :");
         Item[] item = tracker.findByName(key);
-        if (item == null) {
+        if (item.length == 0) {
             System.out.println("Заявки не найдены");
         } else {
             System.out.println("-------------Искомые заявки-------------");
@@ -142,8 +142,9 @@ public class StartUI  {
         }
     }
     private void showMenu() {
-        System.out.println("Меню." + "\n0. Add new Item" +  "\n1. Show all items" + "\n2. Edit item" + "\n3. Delete item");
-        System.out.println("4. Find item by Id" + "\n5. Find items by name" + "\n6. Exit Program" + "\nSelect");
+
+        System.out.println("Меню." + System.lineSeparator() + "0. Add new Item" + System.lineSeparator() + "1. Show all items" + System.lineSeparator() + "2. Edit item" + System.lineSeparator() + "3. Delete item");
+        System.out.println("4. Find item by Id" + System.lineSeparator() + "5. Find items by name" + System.lineSeparator() + "6. Exit Program" + System.lineSeparator() + "Select: ");
     }
     /**
      * Запускт программы.
