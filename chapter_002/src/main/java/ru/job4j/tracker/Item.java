@@ -8,6 +8,7 @@ package ru.job4j.tracker;
  */
 public class Item {
 
+
     private String name;
     private String desc;
     private long created;
@@ -40,7 +41,7 @@ public class Item {
     }
 
     public long getCreated() {
-        return created;
+        return created ;
     }
 
     public String getDesc() {
@@ -50,5 +51,11 @@ public class Item {
     public String getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+    return "Имя заявки :" + getName() + " ,Описание заявки :" + getDesc() + " ,ID этой заявки :" + getId();
+    }
 }
+
 
