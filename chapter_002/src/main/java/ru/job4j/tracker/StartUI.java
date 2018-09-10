@@ -50,7 +50,7 @@ public class StartUI  {
         this.input = input;
         this.tracker = tracker;
     }
-    
+
     /**
      * Основой цикл программы.
      */
@@ -152,6 +152,6 @@ public class StartUI  {
     }
 
     public static void main(String[] args) {
-        new StartUI(new StubInput(new String[] {}), new Tracker()).init();
+        new StartUI(new ConsoleInput(), new Tracker()).init();
     }
 }
