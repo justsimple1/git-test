@@ -1,12 +1,29 @@
 package ru.job4j.tracker;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 
 public class StartUITest {
 
+    private final PrintStream stdout = System.out;
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+    @Before
+    public void loadOutput() {
+        System.setOut(new PrintStream(this.out));
+    }
+    @After
+    public void backOutput() {
+        System.setOut(this.stdout);
+    }
 
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
@@ -59,6 +76,111 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит ID элемента с индексным номером 1.
         assertThat(tracker.findAll()[0].getId(), is(item1.getId()));
+    }
+
+    @Test
+    public void whenFoundById() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("first", "desc1", 123L));
+        Input input = new StubInput(new String[] {"4", item.getId(), "6"});
+        new StartUI(input, tracker).init();
+        assertThat(new String(out.toByteArray()), is( new StringBuilder()
+                        .append("Меню.")            .append(System.lineSeparator())
+                        .append("0. Add new Item")  .append(System.lineSeparator())
+                        .append("1. Show all items").append(System.lineSeparator())
+                        .append("2. Edit item").     append(System.lineSeparator())
+                        .append("3. Delete item")    .append(System.lineSeparator())
+                        .append("4. Find item by Id").append(System.lineSeparator())
+                        .append("5. Find items by name").append(System.lineSeparator())
+                        .append("6. Exit Program")   .append(System.lineSeparator())
+                        .append("Select: ")          .append(System.lineSeparator())
+                        .append("------------Поиск заявки по ID --------------") .append(System.lineSeparator())
+                        .append("-------------Искомая заявка-------------")      .append(System.lineSeparator())
+                        .append("Имя заявки :" + item.getName() + " ,Описание заявки :" + item.getDesc() + " ,ID этой заявки :" + item.getId()) .append(System.lineSeparator())
+                        .append("Меню.") .append(System.lineSeparator())
+                        .append("0. Add new Item") .append(System.lineSeparator())
+                        .append("1. Show all items") .append(System.lineSeparator())
+                        .append("2. Edit item") .append(System.lineSeparator())
+                        .append("3. Delete item") .append(System.lineSeparator())
+                        .append("4. Find item by Id") .append(System.lineSeparator())
+                        .append("5. Find items by name") .append(System.lineSeparator())
+                        .append("6. Exit Program").append(System.lineSeparator())
+                        .append("Select: ")
+                        .append(System.lineSeparator())
+                        .toString()
+                )
+        );
+
+    }
+    @Test
+    public void whenFoundByName() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("first", "desc1", 123L));
+        Input input = new StubInput(new String[] {"5", item.getName(), "6"});
+        new StartUI(input, tracker).init();
+        assertThat(new String(out.toByteArray()), is( new StringBuilder()
+                        .append("Меню.")            .append(System.lineSeparator())
+                        .append("0. Add new Item")  .append(System.lineSeparator())
+                        .append("1. Show all items").append(System.lineSeparator())
+                        .append("2. Edit item").     append(System.lineSeparator())
+                        .append("3. Delete item")    .append(System.lineSeparator())
+                        .append("4. Find item by Id").append(System.lineSeparator())
+                        .append("5. Find items by name").append(System.lineSeparator())
+                        .append("6. Exit Program")   .append(System.lineSeparator())
+                        .append("Select: ")          .append(System.lineSeparator())
+                        .append("------------Поиск заявок по Имени --------------") .append(System.lineSeparator())
+                        .append("-------------Искомые заявки-------------")      .append(System.lineSeparator())
+                        .append("Имя заявки :" + item.getName() + " ,Описание заявки :" + item.getDesc() + " ,ID этой заявки :" + item.getId()) .append(System.lineSeparator())
+                        .append("Меню.") .append(System.lineSeparator())
+                        .append("0. Add new Item") .append(System.lineSeparator())
+                        .append("1. Show all items") .append(System.lineSeparator())
+                        .append("2. Edit item") .append(System.lineSeparator())
+                        .append("3. Delete item") .append(System.lineSeparator())
+                        .append("4. Find item by Id") .append(System.lineSeparator())
+                        .append("5. Find items by name") .append(System.lineSeparator())
+                        .append("6. Exit Program").append(System.lineSeparator())
+                        .append("Select: ")
+                        .append(System.lineSeparator())
+                        .toString()
+                )
+        );
+
+    }
+
+    @Test
+    public void whenFoundAll() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("first", "desc1", 123L));
+        Item item2 = tracker.add(new Item("first2", "desc2", 125L));
+        Input input = new StubInput(new String[] {"1",  "6"});
+        new StartUI(input, tracker).init();
+        assertThat(new String(out.toByteArray()), is( new StringBuilder()
+                        .append("Меню.")            .append(System.lineSeparator())
+                        .append("0. Add new Item")  .append(System.lineSeparator())
+                        .append("1. Show all items").append(System.lineSeparator())
+                        .append("2. Edit item").     append(System.lineSeparator())
+                        .append("3. Delete item")    .append(System.lineSeparator())
+                        .append("4. Find item by Id").append(System.lineSeparator())
+                        .append("5. Find items by name").append(System.lineSeparator())
+                        .append("6. Exit Program")   .append(System.lineSeparator())
+                        .append("Select: ")          .append(System.lineSeparator())
+                        .append("------------Вывод всех заявок --------------") .append(System.lineSeparator())
+                        .append("Имя заявки :" + item.getName() + " ,Описание заявки :" + item.getDesc() + " ,ID этой заявки :" + item.getId()) .append(System.lineSeparator())
+                        .append("Имя заявки :" + item2.getName() + " ,Описание заявки :" + item2.getDesc() + " ,ID этой заявки :" + item2.getId()) .append(System.lineSeparator())
+                        .append("Меню.") .append(System.lineSeparator())
+                        .append("0. Add new Item") .append(System.lineSeparator())
+                        .append("1. Show all items") .append(System.lineSeparator())
+                        .append("2. Edit item") .append(System.lineSeparator())
+                        .append("3. Delete item") .append(System.lineSeparator())
+                        .append("4. Find item by Id") .append(System.lineSeparator())
+                        .append("5. Find items by name") .append(System.lineSeparator())
+                        .append("6. Exit Program").append(System.lineSeparator())
+                        .append("Select: ")
+                        .append(System.lineSeparator())
+                        .toString()
+                )
+        );
+
     }
 
 }
