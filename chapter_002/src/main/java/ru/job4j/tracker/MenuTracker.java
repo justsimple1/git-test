@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import com.sun.javafx.binding.StringFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class MenuTracker {
      */
     //private List<UserAction> actions = new ArrayList<>();
     List<UserAction> actions = new ArrayList<>();
+
     /**
      * Конструктор.
      *
@@ -68,12 +71,17 @@ public class MenuTracker {
     }
     //===============================================================================================================================
     class AddItem implements UserAction {
+        private int key;
+        private String info;
         @Override
         public int key() {
-            return 0;
+            return key;
         }
 
-        AddItem(int key, String info) { }
+        AddItem(int key, String info) {
+            this.key = key;
+            this.info = info;
+        }
 
         @Override
         public void execute(Input input, Tracker tracker) {
@@ -89,14 +97,16 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return "Add new Item.";
+            return String.format("%d %s", key, info);
         }
     }
     //===============================================================================================================================
     class ShowItems implements UserAction {
+        private int key;
+        private String info;
         @Override
         public int key() {
-            return 1;
+            return key;
         }
 
         @Override
@@ -104,23 +114,28 @@ public class MenuTracker {
             Item[] item = tracker.findAll();
             System.out.println("------------Вывод всех заявок --------------");
             for (int i = 0; i < item.length; i++) {
-                presentItem(item[i]);
+                System.out.println(item[i]);
             }
         }
 
-        ShowItems(int key, String info) { }
+        ShowItems(int key, String info) {
+            this.key = key;
+            this.info = info;
+        }
 
         @Override
         public String info() {
-            return "Show all Item.";
+            return String.format("%d %s", key, info);
         }
 
     }
     //===============================================================================================================================
     static class  EditItem implements UserAction {
+        private int key;
+        private String info;
         @Override
         public int key() {
-            return 2;
+            return key;
         }
 
         @Override
@@ -140,20 +155,24 @@ public class MenuTracker {
             }
         }
 
-        EditItem(int key, String info) { }
+        EditItem(int key, String info) {
+            this.key = key;
+            this.info = info;
+        }
 
         @Override
         public String info() {
-            return "Replace this Item.";
+            return String.format("%d %s", key, info);
         }
 
     }
     //===============================================================================================================================
     static class DeleteItem implements UserAction {
-
+        private int key;
+        private String info;
         @Override
         public int key() {
-            return 3;
+            return key;
         }
 
         @Override
@@ -167,20 +186,25 @@ public class MenuTracker {
             }
         }
 
-        DeleteItem(int key, String info) { }
+        DeleteItem(int key, String info) {
+            this.key = key;
+            this.info = info;
+        }
 
         @Override
         public String info() {
-            return "Delete this Item.";
+            return String.format("%d %s", key, info);
         }
 
     }
     //===============================================================================================================================
 
     class FindItemById implements UserAction {
+        private int key;
+        private String info;
         @Override
         public int key() {
-            return 4;
+            return key;
         }
 
         @Override
@@ -192,23 +216,28 @@ public class MenuTracker {
                 System.out.println("Заявки не найдены");
             } else {
                 System.out.println("-------------Искомая заявка-------------");
-                presentItem(item);
+                System.out.println(item);
             }
         }
 
-        FindItemById(int key, String info) { }
+        FindItemById(int key, String info) {
+            this.key = key;
+            this.info = info;
+        }
 
         @Override
         public String info() {
-            return "Find Item by Id.";
+            return String.format("%d %s", key, info);
         }
 
     }
     //===============================================================================================================================
     class FindItemsByName implements UserAction {
+        private int key;
+        private String info;
         @Override
         public int key() {
-            return 5;
+            return key();
         }
 
         @Override
@@ -221,25 +250,32 @@ public class MenuTracker {
             } else {
                 System.out.println("-------------Искомые заявки-------------");
                 for (int i = 0; i < item.length; i++) {
-                    presentItem(item[i]);
+                    System.out.println(item[i]);
                 }
             }
         }
 
-        FindItemsByName(int key, String info) { }
+        FindItemsByName(int key, String info) {
+            this.key = key;
+            this.info = info;
+        }
+
 
         @Override
         public String info() {
-            return "Find Items by Id.";
+            return String.format("%d %s", key, info);
         }
 
     }
     //===============================================================================================================================
     class ExitProgram implements UserAction {
+        private int key;
+        private String info;
         @Override
         public int key() {
-            return 6;
+            return key;
         }
+
 
         @Override
         public void execute(Input input, Tracker tracker) {
@@ -247,21 +283,20 @@ public class MenuTracker {
         }
 
         ExitProgram(int key, String info) {
-            key = this.key();
-            info = this.info();
+           this.key = key;
+            this.info = info;
         }
         @Override
         public String info() {
-            return "Exit out program";
+            return String.format("%d %s", key, info);
         }
 
     }
 
 
-    public void presentItem(Item item) {
-        System.out.println(item.toString());
+
     }
 
 
 
-}
+
