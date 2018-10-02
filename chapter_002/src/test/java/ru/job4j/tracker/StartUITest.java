@@ -78,17 +78,6 @@ public class StartUITest {
         assertThat(tracker.findAll()[0].getId(), is(item1.getId()));
     }
 
-    StringBuilder menu = new StringBuilder()
-            .append("Меню.")            .append(System.lineSeparator())
-            .append("0. Add new Item")  .append(System.lineSeparator())
-            .append("1. Show all items").append(System.lineSeparator())
-            .append("2. Edit item")     .append(System.lineSeparator())
-            .append("3. Delete item")    .append(System.lineSeparator())
-            .append("4. Find item by Id").append(System.lineSeparator())
-            .append("5. Find items by name").append(System.lineSeparator())
-            .append("6. Exit Program")   .append(System.lineSeparator())
-            .append("Select: ")          .append(System.lineSeparator());
-
     @Test
     public void whenFoundById() {
         Tracker tracker = new Tracker();
@@ -107,6 +96,16 @@ public class StartUITest {
         );
 
     }
+    StringBuilder menu = new StringBuilder()
+            .append("Меню.")            .append(System.lineSeparator())
+            .append("0. Add new Item")  .append(System.lineSeparator())
+            .append("1. Show all items").append(System.lineSeparator())
+            .append("2. Edit item")     .append(System.lineSeparator())
+            .append("3. Delete item")    .append(System.lineSeparator())
+            .append("4. Find item by Id").append(System.lineSeparator())
+            .append("5. Find items by name").append(System.lineSeparator())
+            .append("6. Exit Program")   .append(System.lineSeparator())
+            .append("Select: ")          .append(System.lineSeparator());
 
     @Test
     public void whenFoundByName() {
