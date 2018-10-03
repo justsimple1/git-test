@@ -5,10 +5,13 @@ import java.util.List;
 import java.util.Random;
 
 public class StartUI  {
+
     /**
      * Получение данных от пользователя.
      */
     private final Input input;
+    private boolean exit = true;
+
 
     /**
      * Хранилище заявок.
@@ -24,18 +27,22 @@ public class StartUI  {
         this.tracker = tracker;
     }
 
+    public void stop(){
+        this.exit = false;
+    }
 
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         List<Integer> range = new ArrayList<>();
-        menu.fillActions();
+        menu.fillActions(this);
         for (int i = 0; i < menu.getActionsLentgh(); i++) {
             range.add(i);
         }
         do {
             menu.show();
             menu.select(Integer.valueOf(input.ask(String.valueOf("select:" + range))));
-        } while (!"y".equals(this.input.ask("Exit?(y): ")));
+//        } while (!this.exit.equals(this.input.ask("Exit?(y): ")));
+        } while (this.exit);
     }
 
     private void showMenu() {
@@ -45,9 +52,7 @@ public class StartUI  {
     }
 
 
-    public void presentItem(Item item) {
-        System.out.println(item.toString());
-    }
+
 
     public static void main(String[] args) {
         new StartUI(new ConsoleInput(), new Tracker()).init();

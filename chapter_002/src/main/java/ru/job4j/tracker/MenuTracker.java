@@ -1,7 +1,5 @@
 package ru.job4j.tracker;
 
-import com.sun.javafx.binding.StringFormatter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,14 +40,14 @@ public class MenuTracker {
     /**
      * Метод заполняет массив.
      */
-    public void fillActions() {
+    public void fillActions(StartUI ui) {
         this.actions.add(new AddItem(0, "Add program"));
         this.actions.add(new ShowItems(1, "Show all items"));
         this.actions.add(new MenuTracker.EditItem(2, "Edit item"));
         this.actions.add(new MenuTracker.DeleteItem(3, "Delete item"));
         this.actions.add(new FindItemById(4, "Find item by Id"));
         this.actions.add(new FindItemsByName(5, "Find items by name"));
-        this.actions.add(new ExitProgram(6, "Exit Program"));
+        this.actions.add(new ExitProgram(ui, 6, "Exit Program"));
     }
     /**
      * Метод в зависимости от указанного ключа, выполняет соотвествующие действие.
@@ -186,7 +184,7 @@ public class MenuTracker {
             }
         }
 
-        DeleteItem(int key, String info) {
+        DeleteItem(int key, String info ) {
             this.key = key;
             this.info = info;
         }
@@ -269,21 +267,28 @@ public class MenuTracker {
     }
     //===============================================================================================================================
     class ExitProgram implements UserAction {
+        private final StartUI ui ;
         private int key;
         private String info;
+
         @Override
         public int key() {
             return key;
         }
 
+        ExitProgram(StartUI ui){
+            this.ui = ui;
+        }
 
         @Override
         public void execute(Input input, Tracker tracker) {
             System.out.println("------------Выход из программы--------------");
+            this.ui.stop();
         }
 
-        ExitProgram(int key, String info) {
-           this.key = key;
+        ExitProgram(StartUI ui, int key, String info) {
+            this.ui = ui;
+            this.key = key;
             this.info = info;
         }
         @Override
