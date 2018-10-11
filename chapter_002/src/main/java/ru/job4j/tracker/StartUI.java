@@ -11,8 +11,6 @@ public class StartUI  {
      */
     private final Input input;
     private boolean exit = true;
-
-
     /**
      * Хранилище заявок.
      */
@@ -27,8 +25,15 @@ public class StartUI  {
         this.tracker = tracker;
     }
 
-    public void stop(){
+    public void stop() {
         this.exit = false;
+    }
+
+    int[] toIntArray(List<Integer> list) {
+        int[] key = new int[list.size()];
+        for (int i = 0; i < key.length; i++) {
+            key[i] = list.get(i);
+        } return key;
     }
 
     public void init() {
@@ -38,15 +43,14 @@ public class StartUI  {
         for (int i = 0; i < menu.getActionsLentgh(); i++) {
             range.add(i);
         }
+        int[] key = toIntArray(range);
         do {
             menu.show();
-            menu.select(Integer.valueOf(input.ask(String.valueOf("select:" + range))));
-//        } while (!this.exit.equals(this.input.ask("Exit?(y): ")));
+            menu.select(input.ask("select:", key));
         } while (this.exit);
     }
 
     private void showMenu() {
-
         System.out.println("Меню." + System.lineSeparator() + "0. Add new Item" + System.lineSeparator() + "1. Show all items" + System.lineSeparator() + "2. Edit item" + System.lineSeparator() + "3. Delete item");
         System.out.println("4. Find item by Id" + System.lineSeparator() + "5. Find items by name" + System.lineSeparator() + "6. Exit Program" + System.lineSeparator() + "Select: ");
     }
@@ -55,6 +59,6 @@ public class StartUI  {
 
 
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 }
