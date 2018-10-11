@@ -143,4 +143,18 @@ public class StartUITest {
 
     }
 
+    @Test
+    public void whenInsertInvalidDateInput() {
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[] {"invalid", "1"})
+        );
+        input.ask("Enter", new int[] {1});
+        assertThat(
+                this.out.toString(),
+                is(
+                        String.format("Please enter validate data again.%n")
+                )
+        );
+    }
+
 }
